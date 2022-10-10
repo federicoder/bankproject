@@ -40,4 +40,4 @@ In the output directory you will see the images of plots runned in scripts.
 There are also .dot image that could be convered in a commod software online to convert .dot into .png
 
 ###### Authors:
-###### Federico D'Errico Mauro Giordano Francesco Palumbo
+###### [Federico D'Errico](https://github.com/federicoder) [Mauro Giordano](https://github.com/mgiordano95) [Francesco Palumbo]()
