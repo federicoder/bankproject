@@ -1,7 +1,6 @@
 ## BANK PROJECT
 #### A machine learning project for AIML Exam of poliba.it
 
----
 
 First Download repository by git clone via ssh or https.
 
@@ -27,7 +26,7 @@ sudo pacman -S tk
 ```
 ##### if you have windows os you shouldn't have problems
 
----
+
 ## START PHASE
 To start algorithm just run :
 
@@ -36,7 +35,6 @@ python3 run_classifiers.py
 ```
 or just run that file from your ide.
 
----
 
 ## CONTENTS
 - `output` directory :
