@@ -1,7 +1,5 @@
 # Support functions
-
 from preparingdata import minVec, maxVec
-from utils_service import *
 from model import *
 import matplotlib.pyplot as plt
 import matplotlib
@@ -10,7 +8,6 @@ from sklearn.metrics import classification_report
 matplotlib.use("TkAgg")
 y = ds_train.Exited
 X = ds_train.loc[:, ds_train.columns != 'Exited']
-# X_pol2 = ds_train_pol2
 auc_log_primal, fpr_log_primal, tpr_log_primal = get_auc_scores(y, log_primal.predict(X),
                                                                 log_primal.predict_proba(X)[:, 1])
 auc_SVM_RBF, fpr_SVM_RBF, tpr_SVM_RBF = get_auc_scores(y, SVM_RBF.predict(X), SVM_RBF.predict_proba(X)[:, 1])
@@ -21,7 +18,6 @@ auc_XGB, fpr_XGB, tpr_XGB = get_auc_scores(y, xgb.predict(X), xgb.predict_proba(
 
 plt.figure(figsize=(12, 6), linewidth=1)
 plt.plot(fpr_log_primal, tpr_log_primal, label='log primal Score: ' + str(round(auc_log_primal, 5)))
-# plt.plot(fpr_log_pol2, tpr_log_pol2, label='log pol2 score: ' + str(round(auc_log_pol2, 5)))
 plt.plot(fpr_SVM_RBF, tpr_SVM_RBF, label='SVM RBF Score: ' + str(round(auc_SVM_RBF, 5)))
 plt.plot(fpr_KNN, tpr_KNN, label='KNN RBF Score: ' + str(round(auc_SVM_RBF, 5)))
 plt.plot(fpr_DTree, tpr_Dtree, label='Decision Tree RBF Score: ' + str(round(auc_SVM_RBF, 5)))
@@ -32,7 +28,7 @@ plt.xlabel('False positive rate')
 plt.ylabel('True positive rate')
 plt.title('ROC Curve')
 plt.legend(loc='best')
-# plt.savefig('roc_results_ratios.png')
+plt.savefig("./output/roc_results_ratios_on_train_set.png")
 plt.show()
 
 # TESTING PHASE:
@@ -53,5 +49,5 @@ plt.xlabel('False positive rate')
 plt.ylabel('True positive rate')
 plt.title('ROC Curve')
 plt.legend(loc='best')
-# plt.savefig('roc_results_ratios.png')
+plt.savefig("./output/roc_results_ratios_on_test_set.png")
 plt.show()

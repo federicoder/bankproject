@@ -7,7 +7,9 @@ import tkinter
 import utils_service as us
 from imblearn.under_sampling import NearMiss
 import seaborn as sns
+import sys
 
+sys.stdout = open('./output/report.txt', 'wt')
 sns.set(palette="Set2")
 matplotlib.use('TkAgg')
 
@@ -25,7 +27,7 @@ print('Get duplicated data:')
 print(ds[ds.duplicated()])
 print(ds.corr())
 
-#casting to int64 float attributes:
+# casting to int64 float attributes:
 ds['EstimatedSalary'] = ds['EstimatedSalary'].astype(np.int64)
 ds['Balance'] = ds['Balance'].astype(np.int64)
 
@@ -45,6 +47,7 @@ ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
         shadow=True, startangle=90)
 ax1.axis('equal')
 plt.title("Proportion of customer churned and retained", size=20)
+plt.savefig("./output/proportions_of_customer_churned.png")
 plt.show()
 
 # We first review the 'Status' relation with categorical variables
@@ -61,8 +64,8 @@ print('detecting outliers:\n')
 plt.figure(figsize=(12, 12))
 bplot = ds.boxplot(patch_artist=True)
 plt.xticks(rotation=90)
-plt.show()
 plt.savefig("./output/outliers.png")
+plt.show()
 
 # r removing outlier from estimatedSalary:
 # Split Train, test data:
@@ -80,10 +83,11 @@ plt.ylim(-1, 5)
 ds_train['TenureByAge'] = ds_train.Tenure / (ds_train.Age)
 sns.boxplot(y='TenureByAge', x='Exited', hue='Exited', data=ds_train)
 plt.ylim(-1, 1)
+plt.savefig("./output/ds_with_new_feature_TenureByAge.png")
 plt.show()
 
 # Lastly we introduce a variable to capture credit score given age to take into account credit behaviour visavis adult life
-ds_train['CreditScoreGivenAge'] = ds_train.CreditScore /(ds_train.Age)
+ds_train['CreditScoreGivenAge'] = ds_train.CreditScore / (ds_train.Age)
 
 print(ds_train)
 
@@ -91,13 +95,14 @@ print(ds_train)
 ds_train['EstimatedSalary'] = us.remove_outliers(ds, 'EstimatedSalary')
 sns.boxenplot(ds['EstimatedSalary'])
 plt.ylabel('distribution')
+plt.savefig("./output/removing_outliers_estimated_salary.png")
 plt.show()
 
 # checking correlation:
 plt.subplots(figsize=(11, 8))
 sns.heatmap(ds.corr(), annot=True, cmap="RdYlBu")
-plt.show()
 plt.savefig("./output/correlation.png")
+plt.show()
 
 # Arrange columns by data type for easier manipulation
 continuous_vars = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary', 'BalanceSalaryRatio',
@@ -123,10 +128,10 @@ for i in lst:
 ds_train = ds_train.drop(remove, axis=1)
 ds_train.head()
 
-
 # min - max normalization:
 # minMax scaling the continuous variables
+print("Min-Max normalization:\n")
 minVec = ds_train[continuous_vars].min().copy()
 maxVec = ds_train[continuous_vars].max().copy()
-ds_train[continuous_vars] = (ds_train[continuous_vars]-minVec)/(maxVec-minVec)
-ds_train.head()
+ds_train[continuous_vars] = (ds_train[continuous_vars] - minVec) / (maxVec - minVec)
+print(ds_train.head())
