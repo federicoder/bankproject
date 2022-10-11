@@ -1,6 +1,8 @@
 ## BANK PROJECT
 #### A machine learning project for AIML Exam of poliba.it
 
+---
+
 First Download repository by git clone via ssh or https.
 
 ## INSTALL PHASE:
@@ -23,11 +25,9 @@ And then import Tkinter in `preparingdata.py` and `run_classifiers.py`
 ```
 sudo pacman -S tk
 ```
-##### if you have windows os you shouldn't have problems, otherwise you have to delete the code:
-```
-matplotlib.use('TkAgg')
-```
-##### from `preparingdata.py` and `run_classifiers.py`
+##### if you have windows os you shouldn't have problems
+
+---
 ## START PHASE
 To start algorithm just run :
 
@@ -36,8 +36,15 @@ python3 run_classifiers.py
 ```
 or just run that file from your ide.
 
-In the output directory you will see the images of plots runned in scripts.
-There are also .dot image that could be convered in a commod software online to convert .dot into .png
+---
 
+## CONTENTS
+- `output` directory :
+In the output directory you will see all images of plots runned in scripts in `.png` format, and a `report.txt` file which include all log seen in console.
+- `prepraringdata` file in which we manipuale data (clean, create new features, deleting duplicates ecc..)
+- `model` file in which we defined all the classifers for our alghoritms used for training phase
+- `run_classifiers` file in which we defined all classifiers runned in test phase, with a report of an evaluation phase
+- `dataset` directory in which there is the dataset imported with pandas in `preparingdata.py`
+- `util_service` file in which we define common function used in our implementation.
 ###### Authors:
 ###### [Federico D'Errico](https://github.com/federicoder) [Mauro Giordano](https://github.com/mgiordano95) [Francesco Palumbo]()
