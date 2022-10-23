@@ -56,7 +56,7 @@ sns.countplot(x='Geography', hue='Exited', data=ds, ax=axarr[0][0])
 sns.countplot(x='Gender', hue='Exited', data=ds, ax=axarr[0][1])
 sns.countplot(x='HasCrCard', hue='Exited', data=ds, ax=axarr[1][0])
 sns.countplot(x='IsActiveMember', hue='Exited', data=ds, ax=axarr[1][1])
-
+plt.savefig("./output/proportions_RelevantFeatures_Exited.png")
 ### FEATURE ENGINEERING :
 
 # detecting outliers:
