@@ -9,7 +9,7 @@ from imblearn.under_sampling import NearMiss
 import seaborn as sns
 import sys
 
-sys.stdout = open('./output/report.txt', 'wt')
+# sys.stdout = open('./output/report.txt', 'wt')
 sns.set(palette="Set2")
 matplotlib.use('TkAgg')
 

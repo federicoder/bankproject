@@ -22,9 +22,12 @@ def compute_and_print_evaluation(y_test, predictor):
 
 # Function to give best model score and parameters
 def best_model(model):
-    print(model.best_score_)
-    print(model.best_params_)
-    print(model.best_estimator_)
+    print("Best score of model:")
+    print(model.best_score_, "\n")
+    print("Best params of model:")
+    print(model.best_params_, "\n")
+    print("Best estimator of model:")
+    print(model.best_estimator_, "\n")
 
 
 def get_auc_scores(y_actual, method, method2):
