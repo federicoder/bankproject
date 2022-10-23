@@ -4,7 +4,7 @@
 
 First Download repository by git clone via ssh or https.
 
-## INSTALL PHASE:
+## Installation phase:
 
 go to requirements.txt and run the command:
 
@@ -27,11 +27,15 @@ sudo pacman -S tk
 ##### if you have windows os you shouldn't have problems
 
 
-## START PHASE
+## Start Phase:
 To start algorithm just run :
 
 ```
 python3 run_classifiers.py
+```
+or
+```
+python run_classifiers.py
 ```
 or just run that file from your ide.
 
@@ -45,4 +49,4 @@ In the output directory you will see all images of plots runned in scripts in `.
 - `dataset` directory in which there is the dataset imported with pandas in `preparingdata.py`
 - `util_service` file in which we define common function used in our implementation.
 ###### Authors:
-###### [Federico D'Errico](https://github.com/federicoder) [Mauro Giordano](https://github.com/mgiordano95) [Francesco Palumbo]()
+###### [Federico D'Errico](https://github.com/federicoder) [Mauro Giordano](https://github.com/mgiordano95) [Francesco Palumbo](https://github.com/FrancescoP09)
