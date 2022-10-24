@@ -1,4 +1,4 @@
-from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score, f1_score, accuracy_score, roc_curve
+from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score, f1_score, accuracy_score, roc_curve, precision_score
 import numpy as np
 
 
@@ -15,9 +15,9 @@ def remove_outliers(df, col):
 def compute_and_print_evaluation(y_test, predictor):
     print("ROC AUC Score:", roc_auc_score(y_test, predictor))
     print("Confusion Matrix:\n", confusion_matrix(y_test, predictor))
-    print("F1 Score:", f1_score(y_test, predictor))
-    print("Classification Report:\n", classification_report(y_test, predictor))
     print("Accuracy Score:", accuracy_score(y_test, predictor))
+    print("Precision Score:", precision_score(y_test, predictor))
+    print("Classification Report:\n", classification_report(y_test, predictor))
 
 
 # Function to give best model score and parameters

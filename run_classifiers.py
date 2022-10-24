@@ -3,6 +3,7 @@ from preparingdata import minVec, maxVec
 from model import *
 import matplotlib.pyplot as plt
 import matplotlib
+from utils_service import *
 from sklearn.metrics import classification_report
 
 matplotlib.use("TkAgg")
@@ -41,7 +42,13 @@ ds_test = df_prep_pipeline(ds_test, ds_train.columns, minVec, maxVec)
 ds_test = ds_test.mask(np.isinf(ds_test))
 ds_test = ds_test.dropna()
 print(ds_test.shape)
-# print(classification_report(ds_test.Exited, RF.predict(ds_test.loc[:, ds_test.columns != 'Exited'])))
+
+# getting some information about classification pararmeters for evaluation phase:
+print("Evaluation parameters for Random Forest:\n")
+compute_and_print_evaluation(ds_test.Exited, RF.predict(ds_test.loc[:, ds_test.columns != 'Exited']))
+print("Evaluation parameters for XGB:\n")
+compute_and_print_evaluation(ds_test.Exited, xgb.predict(ds_test.loc[:, ds_test.columns != 'Exited']))
+
 auc_RF_test, fpr_RF_test, tpr_RF_test = get_auc_scores(ds_test.Exited,
                                                        RF.predict(ds_test.loc[:, ds_test.columns != 'Exited']),
                                                        RF.predict_proba(ds_test.loc[:, ds_test.columns != 'Exited'])[:,
@@ -52,37 +59,37 @@ auc_DTree_test, fpr_DTree_test, tpr_Dtree_test = get_auc_scores(ds_test.Exited,
                                                                 dtree.predict_proba(
                                                                     ds_test.loc[:, ds_test.columns != 'Exited'])[:,
                                                                 1])
-auc_KNN_test, fpr_KNN_test, tpr_KNN_test = get_auc_scores(ds_test.Exited,
-                                                          knn.predict(
-                                                              ds_test.loc[:, ds_test.columns != 'Exited']),
-                                                          knn.predict_proba(
-                                                              ds_test.loc[:, ds_test.columns != 'Exited'])[:,
-                                                          1])
+# auc_KNN_test, fpr_KNN_test, tpr_KNN_test = get_auc_scores(ds_test.Exited,
+#                                                           knn.predict(
+#                                                               ds_test.loc[:, ds_test.columns != 'Exited']),
+#                                                           knn.predict_proba(
+#                                                               ds_test.loc[:, ds_test.columns != 'Exited'])[:,
+#                                                           1])
 auc_xgb_test, fpr_xgb_test, tpr_xgb_test = get_auc_scores(ds_test.Exited,
                                                           xgb.predict(
                                                               ds_test.loc[:, ds_test.columns != 'Exited']),
                                                           xgb.predict_proba(
                                                               ds_test.loc[:, ds_test.columns != 'Exited'])[:,
                                                           1])
-auc_svm_test, fpr_svm_test, tpr_svm_test = get_auc_scores(ds_test.Exited,
-                                                          SVM_RBF.predict(
-                                                              ds_test.loc[:, ds_test.columns != 'Exited']),
-                                                          SVM_RBF.predict_proba(
-                                                              ds_test.loc[:, ds_test.columns != 'Exited'])[:,
-                                                          1])
-auc_log_test, fpr_log_test, tpr_log_test = get_auc_scores(ds_test.Exited,
-                                                          log_primal.predict(
-                                                              ds_test.loc[:, ds_test.columns != 'Exited']),
-                                                          log_primal.predict_proba(
-                                                              ds_test.loc[:, ds_test.columns != 'Exited'])[:,
-                                                          1])
+# auc_svm_test, fpr_svm_test, tpr_svm_test = get_auc_scores(ds_test.Exited,
+#                                                           SVM_RBF.predict(
+#                                                               ds_test.loc[:, ds_test.columns != 'Exited']),
+#                                                           SVM_RBF.predict_proba(
+#                                                               ds_test.loc[:, ds_test.columns != 'Exited'])[:,
+#                                                           1])
+# auc_log_test, fpr_log_test, tpr_log_test = get_auc_scores(ds_test.Exited,
+#                                                           log_primal.predict(
+#                                                               ds_test.loc[:, ds_test.columns != 'Exited']),
+#                                                           log_primal.predict_proba(
+#                                                               ds_test.loc[:, ds_test.columns != 'Exited'])[:,
+#                                                           1])
 plt.figure(figsize=(12, 6), linewidth=1)
 plt.plot(fpr_RF_test, tpr_RF_test, label='RF score: ' + str(round(auc_RF_test, 5)))
 plt.plot(fpr_DTree_test, tpr_Dtree_test, label='Dtree score: ' + str(round(auc_DTree_test, 5)))
-plt.plot(fpr_KNN_test, tpr_KNN_test, label='KNN score: ' + str(round(auc_KNN_test, 5)))
+# plt.plot(fpr_KNN_test, tpr_KNN_test, label='KNN score: ' + str(round(auc_KNN_test, 5)))
 plt.plot(fpr_xgb_test, tpr_xgb_test, label='XGB score: ' + str(round(auc_xgb_test, 5)))
-plt.plot(fpr_svm_test, tpr_svm_test, label='SVM score: ' + str(round(auc_svm_test, 5)))
-plt.plot(fpr_log_test, tpr_log_test, label='logistic reg score: ' + str(round(auc_log_test, 5)))
+# plt.plot(fpr_svm_test, tpr_svm_test, label='SVM score: ' + str(round(auc_svm_test, 5)))
+# plt.plot(fpr_log_test, tpr_log_test, label='logistic reg score: ' + str(round(auc_log_test, 5)))
 
 plt.plot([0, 1], [0, 1], 'k--', label='Random: 0.5')
 plt.xlabel('False positive rate')
