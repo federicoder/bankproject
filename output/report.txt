@@ -211,3 +211,724 @@ First five rows of the Training Set after min-max normalization:
 5351                  1             -1            1  
 4314                 -1             -1            1  
 --------------------------------------------
+Total number of rows for the Training set and the Test set:
+7963
+--------------------------------------------
+First five rows of the Reordered Training Set For GMM:
+      Exited  CreditScore       Age  Tenure   Balance  NumOfProducts  \
+8159       0        0.222  0.094595     0.6  0.000000       0.333333   
+6332       0        0.538  0.229730     0.4  0.360358       0.000000   
+8895       0        0.698  0.297297     0.8  0.486405       0.000000   
+5351       0        0.416  0.310811     0.2  0.495129       0.000000   
+4314       0        0.576  0.216216     0.5  0.532093       0.000000   
+
+      EstimatedSalary  BalanceSalaryRatio  TenureByAge  CreditScoreGivenAge  \
+8159         0.076117            0.000000     0.432000             0.323157   
+6332         0.102375            0.003290     0.205714             0.305211   
+8895         0.510225            0.000894     0.360000             0.300198   
+5351         0.555742            0.000836     0.087805             0.208238   
+4314         0.778146            0.000642     0.264706             0.330882   
+
+      HasCrCard  IsActiveMember  Geography_Spain  Geography_France  \
+8159          1               1                1                -1   
+6332          1               1               -1                 1   
+8895          1              -1               -1                 1   
+5351          1               1               -1                -1   
+4314         -1               1               -1                 1   
+
+      Geography_Germany  Gender_Female  Gender_Male  
+8159                 -1              1           -1  
+6332                 -1              1           -1  
+8895                 -1              1           -1  
+5351                  1             -1            1  
+4314                 -1             -1            1  
+--------------------------------------------
+Min-Max normalization:
+
+Model Fit and Selection Phase:
+
+CV of Logistic Regression:
+
+hyperparameter tuning for logistic regression:
+
+Best score of model:
+0.8150000000000001 
+
+Best params of model:
+{'C': 50, 'fit_intercept': True, 'intercept_scaling': 1, 'max_iter': 250, 'penalty': 'l2', 'tol': 1e-05} 
+
+Best estimator of model:
+LogisticRegression(C=50, max_iter=250, tol=1e-05) 
+
+--------------------------------------------
+hyperparameter tuning for SVM:
+
+Best score of model:
+0.8519997453431599 
+
+Best params of model:
+{'C': 100, 'gamma': 0.1, 'kernel': 'rbf', 'probability': True} 
+
+Best estimator of model:
+SVC(C=100, gamma=0.1, probability=True) 
+
+--------------------------------------------
+Fit Decision Tree Classifier with max depth 8 setted:
+
+Fitting 5 folds for each of 4 candidates, totalling 20 fits
+[CV 1/5] END .....criterion=gini, splitter=best;, score=0.834 total time=   0.0s
+[CV 2/5] END .....criterion=gini, splitter=best;, score=0.852 total time=   0.0s
+[CV 3/5] END .....criterion=gini, splitter=best;, score=0.858 total time=   0.0s
+[CV 4/5] END .....criterion=gini, splitter=best;, score=0.861 total time=   0.0s
+[CV 5/5] END .....criterion=gini, splitter=best;, score=0.848 total time=   0.0s
+[CV 1/5] END ...criterion=gini, splitter=random;, score=0.838 total time=   0.0s
+[CV 2/5] END ...criterion=gini, splitter=random;, score=0.851 total time=   0.0s
+[CV 3/5] END ...criterion=gini, splitter=random;, score=0.857 total time=   0.0s
+[CV 4/5] END ...criterion=gini, splitter=random;, score=0.840 total time=   0.0s
+[CV 5/5] END ...criterion=gini, splitter=random;, score=0.841 total time=   0.0s
+[CV 1/5] END ..criterion=entropy, splitter=best;, score=0.836 total time=   0.0s
+[CV 2/5] END ..criterion=entropy, splitter=best;, score=0.852 total time=   0.0s
+[CV 3/5] END ..criterion=entropy, splitter=best;, score=0.860 total time=   0.0s
+[CV 4/5] END ..criterion=entropy, splitter=best;, score=0.854 total time=   0.0s
+[CV 5/5] END ..criterion=entropy, splitter=best;, score=0.848 total time=   0.0s
+[CV 1/5] END criterion=entropy, splitter=random;, score=0.834 total time=   0.0s
+[CV 2/5] END criterion=entropy, splitter=random;, score=0.854 total time=   0.0s
+[CV 3/5] END criterion=entropy, splitter=random;, score=0.852 total time=   0.0s
+[CV 4/5] END criterion=entropy, splitter=random;, score=0.839 total time=   0.0s
+[CV 5/5] END criterion=entropy, splitter=random;, score=0.841 total time=   0.0s
+hyperparameter tuning for Decision Tree:
+
+Best score of model:
+0.850625 
+
+Best params of model:
+{'criterion': 'gini', 'splitter': 'best'} 
+
+Best estimator of model:
+DecisionTreeClassifier(max_depth=8, random_state=200) 
+
+--------------------------------------------
+Fitting 5 folds for each of 80 candidates, totalling 400 fits
+[CV 1/5] END algorithm=auto, n_neighbors=1, p=1, weights=uniform;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=1, p=1, weights=uniform;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=1, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=1, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=1, p=2, weights=uniform;, score=0.789 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=1, p=2, weights=uniform;, score=0.776 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=1, p=2, weights=uniform;, score=0.786 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=1, p=2, weights=uniform;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=1, p=2, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=1, p=2, weights=distance;, score=0.789 total time=   0.0s
+[CV 2/5] END algorithm=auto, n_neighbors=1, p=2, weights=distance;, score=0.776 total time=   0.0s
+[CV 3/5] END algorithm=auto, n_neighbors=1, p=2, weights=distance;, score=0.786 total time=   0.0s
+[CV 4/5] END algorithm=auto, n_neighbors=1, p=2, weights=distance;, score=0.787 total time=   0.0s
+[CV 5/5] END algorithm=auto, n_neighbors=1, p=2, weights=distance;, score=0.794 total time=   0.0s
+[CV 1/5] END algorithm=auto, n_neighbors=2, p=1, weights=uniform;, score=0.815 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=2, p=1, weights=uniform;, score=0.813 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=2, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=2, p=1, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=2, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=2, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=2, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=2, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=2, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=2, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=2, p=2, weights=distance;, score=0.789 total time=   0.0s
+[CV 2/5] END algorithm=auto, n_neighbors=2, p=2, weights=distance;, score=0.776 total time=   0.0s
+[CV 3/5] END algorithm=auto, n_neighbors=2, p=2, weights=distance;, score=0.786 total time=   0.0s
+[CV 4/5] END algorithm=auto, n_neighbors=2, p=2, weights=distance;, score=0.787 total time=   0.0s
+[CV 5/5] END algorithm=auto, n_neighbors=2, p=2, weights=distance;, score=0.794 total time=   0.0s
+[CV 1/5] END algorithm=auto, n_neighbors=3, p=1, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=3, p=1, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=3, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=3, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=3, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=3, p=1, weights=distance;, score=0.809 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=3, p=1, weights=distance;, score=0.816 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=3, p=1, weights=distance;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=3, p=2, weights=uniform;, score=0.806 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=3, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=3, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=3, p=2, weights=distance;, score=0.802 total time=   0.0s
+[CV 2/5] END algorithm=auto, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.0s
+[CV 3/5] END algorithm=auto, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.0s
+[CV 4/5] END algorithm=auto, n_neighbors=3, p=2, weights=distance;, score=0.818 total time=   0.0s
+[CV 5/5] END algorithm=auto, n_neighbors=3, p=2, weights=distance;, score=0.809 total time=   0.0s
+[CV 1/5] END algorithm=auto, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=4, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=4, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=4, p=1, weights=distance;, score=0.823 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=4, p=1, weights=distance;, score=0.813 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=4, p=1, weights=distance;, score=0.815 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=4, p=2, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=4, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=4, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=4, p=2, weights=uniform;, score=0.815 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=4, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.0s
+[CV 2/5] END algorithm=auto, n_neighbors=4, p=2, weights=distance;, score=0.809 total time=   0.0s
+[CV 3/5] END algorithm=auto, n_neighbors=4, p=2, weights=distance;, score=0.823 total time=   0.0s
+[CV 4/5] END algorithm=auto, n_neighbors=4, p=2, weights=distance;, score=0.817 total time=   0.0s
+[CV 5/5] END algorithm=auto, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.0s
+[CV 1/5] END algorithm=auto, n_neighbors=5, p=1, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=5, p=1, weights=uniform;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=5, p=1, weights=uniform;, score=0.827 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=5, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=5, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=5, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=5, p=1, weights=distance;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=5, p=1, weights=distance;, score=0.822 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=5, p=2, weights=uniform;, score=0.810 total time=   0.1s
+[CV 2/5] END algorithm=auto, n_neighbors=5, p=2, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=auto, n_neighbors=5, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=auto, n_neighbors=5, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=auto, n_neighbors=5, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=auto, n_neighbors=5, p=2, weights=distance;, score=0.811 total time=   0.0s
+[CV 2/5] END algorithm=auto, n_neighbors=5, p=2, weights=distance;, score=0.816 total time=   0.0s
+[CV 3/5] END algorithm=auto, n_neighbors=5, p=2, weights=distance;, score=0.822 total time=   0.0s
+[CV 4/5] END algorithm=auto, n_neighbors=5, p=2, weights=distance;, score=0.821 total time=   0.0s
+[CV 5/5] END algorithm=auto, n_neighbors=5, p=2, weights=distance;, score=0.807 total time=   0.0s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=uniform;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=uniform;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=uniform;, score=0.789 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=uniform;, score=0.776 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=uniform;, score=0.786 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=uniform;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=distance;, score=0.789 total time=   0.0s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=distance;, score=0.776 total time=   0.0s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=distance;, score=0.786 total time=   0.0s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=distance;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=1, p=2, weights=distance;, score=0.794 total time=   0.0s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=uniform;, score=0.815 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=uniform;, score=0.813 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=distance;, score=0.789 total time=   0.0s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=distance;, score=0.776 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=distance;, score=0.786 total time=   0.0s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=distance;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=2, p=2, weights=distance;, score=0.794 total time=   0.0s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=distance;, score=0.809 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=distance;, score=0.816 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=distance;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=uniform;, score=0.806 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=distance;, score=0.802 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=distance;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=3, p=2, weights=distance;, score=0.809 total time=   0.0s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=distance;, score=0.823 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=distance;, score=0.813 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=4, p=1, weights=distance;, score=0.815 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=uniform;, score=0.815 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=distance;, score=0.809 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=distance;, score=0.823 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=distance;, score=0.817 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=uniform;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=uniform;, score=0.827 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=distance;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=5, p=1, weights=distance;, score=0.822 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=uniform;, score=0.810 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=distance;, score=0.811 total time=   0.1s
+[CV 2/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=distance;, score=0.816 total time=   0.1s
+[CV 3/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=distance;, score=0.822 total time=   0.1s
+[CV 4/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=distance;, score=0.821 total time=   0.1s
+[CV 5/5] END algorithm=ball_tree, n_neighbors=5, p=2, weights=distance;, score=0.807 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=uniform;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=uniform;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=uniform;, score=0.789 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=uniform;, score=0.776 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=uniform;, score=0.786 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=uniform;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=distance;, score=0.789 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=distance;, score=0.776 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=distance;, score=0.786 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=distance;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=1, p=2, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=uniform;, score=0.815 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=uniform;, score=0.813 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=distance;, score=0.789 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=distance;, score=0.776 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=distance;, score=0.786 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=distance;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=2, p=2, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=distance;, score=0.809 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=distance;, score=0.816 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=distance;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=uniform;, score=0.806 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=distance;, score=0.802 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=distance;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=3, p=2, weights=distance;, score=0.809 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=distance;, score=0.823 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=distance;, score=0.813 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=4, p=1, weights=distance;, score=0.815 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=uniform;, score=0.815 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=distance;, score=0.809 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=distance;, score=0.823 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=distance;, score=0.817 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=uniform;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=uniform;, score=0.827 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=distance;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=5, p=1, weights=distance;, score=0.822 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=uniform;, score=0.810 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=distance;, score=0.811 total time=   0.1s
+[CV 2/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=distance;, score=0.816 total time=   0.1s
+[CV 3/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=distance;, score=0.822 total time=   0.1s
+[CV 4/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=distance;, score=0.821 total time=   0.1s
+[CV 5/5] END algorithm=kd_tree, n_neighbors=5, p=2, weights=distance;, score=0.807 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=1, p=1, weights=uniform;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=1, p=1, weights=uniform;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=1, p=1, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=1, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=1, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=1, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=1, p=2, weights=uniform;, score=0.789 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=1, p=2, weights=uniform;, score=0.776 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=1, p=2, weights=uniform;, score=0.786 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=1, p=2, weights=uniform;, score=0.787 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=1, p=2, weights=uniform;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=1, p=2, weights=distance;, score=0.789 total time=   0.0s
+[CV 2/5] END algorithm=brute, n_neighbors=1, p=2, weights=distance;, score=0.776 total time=   0.0s
+[CV 3/5] END algorithm=brute, n_neighbors=1, p=2, weights=distance;, score=0.786 total time=   0.0s
+[CV 4/5] END algorithm=brute, n_neighbors=1, p=2, weights=distance;, score=0.787 total time=   0.0s
+[CV 5/5] END algorithm=brute, n_neighbors=1, p=2, weights=distance;, score=0.794 total time=   0.0s
+[CV 1/5] END algorithm=brute, n_neighbors=2, p=1, weights=uniform;, score=0.815 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=2, p=1, weights=uniform;, score=0.813 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=2, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=2, p=1, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=2, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=2, p=1, weights=distance;, score=0.793 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=2, p=1, weights=distance;, score=0.778 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=2, p=1, weights=distance;, score=0.794 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=2, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=2, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=2, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=2, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=2, p=2, weights=distance;, score=0.789 total time=   0.0s
+[CV 2/5] END algorithm=brute, n_neighbors=2, p=2, weights=distance;, score=0.776 total time=   0.0s
+[CV 3/5] END algorithm=brute, n_neighbors=2, p=2, weights=distance;, score=0.786 total time=   0.0s
+[CV 4/5] END algorithm=brute, n_neighbors=2, p=2, weights=distance;, score=0.787 total time=   0.0s
+[CV 5/5] END algorithm=brute, n_neighbors=2, p=2, weights=distance;, score=0.794 total time=   0.0s
+[CV 1/5] END algorithm=brute, n_neighbors=3, p=1, weights=uniform;, score=0.814 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=3, p=1, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=3, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=3, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=3, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=3, p=1, weights=distance;, score=0.809 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=3, p=1, weights=distance;, score=0.816 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=3, p=1, weights=distance;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=3, p=1, weights=distance;, score=0.814 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=3, p=2, weights=uniform;, score=0.806 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=3, p=2, weights=uniform;, score=0.814 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=3, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=3, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=3, p=2, weights=distance;, score=0.802 total time=   0.0s
+[CV 2/5] END algorithm=brute, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.0s
+[CV 3/5] END algorithm=brute, n_neighbors=3, p=2, weights=distance;, score=0.812 total time=   0.0s
+[CV 4/5] END algorithm=brute, n_neighbors=3, p=2, weights=distance;, score=0.818 total time=   0.0s
+[CV 5/5] END algorithm=brute, n_neighbors=3, p=2, weights=distance;, score=0.809 total time=   0.0s
+[CV 1/5] END algorithm=brute, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=4, p=1, weights=uniform;, score=0.820 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=4, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=4, p=1, weights=uniform;, score=0.818 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=4, p=1, weights=distance;, score=0.823 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=4, p=1, weights=distance;, score=0.813 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=4, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=4, p=1, weights=distance;, score=0.815 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=4, p=2, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=4, p=2, weights=uniform;, score=0.819 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=4, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=4, p=2, weights=uniform;, score=0.815 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=4, p=2, weights=uniform;, score=0.812 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.0s
+[CV 2/5] END algorithm=brute, n_neighbors=4, p=2, weights=distance;, score=0.809 total time=   0.0s
+[CV 3/5] END algorithm=brute, n_neighbors=4, p=2, weights=distance;, score=0.823 total time=   0.0s
+[CV 4/5] END algorithm=brute, n_neighbors=4, p=2, weights=distance;, score=0.817 total time=   0.0s
+[CV 5/5] END algorithm=brute, n_neighbors=4, p=2, weights=distance;, score=0.808 total time=   0.0s
+[CV 1/5] END algorithm=brute, n_neighbors=5, p=1, weights=uniform;, score=0.816 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=5, p=1, weights=uniform;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=5, p=1, weights=uniform;, score=0.827 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=5, p=1, weights=uniform;, score=0.819 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=5, p=1, weights=uniform;, score=0.821 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=5, p=1, weights=distance;, score=0.817 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=5, p=1, weights=distance;, score=0.831 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=5, p=1, weights=distance;, score=0.824 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=5, p=1, weights=distance;, score=0.822 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=5, p=2, weights=uniform;, score=0.810 total time=   0.1s
+[CV 2/5] END algorithm=brute, n_neighbors=5, p=2, weights=uniform;, score=0.817 total time=   0.1s
+[CV 3/5] END algorithm=brute, n_neighbors=5, p=2, weights=uniform;, score=0.824 total time=   0.1s
+[CV 4/5] END algorithm=brute, n_neighbors=5, p=2, weights=uniform;, score=0.818 total time=   0.1s
+[CV 5/5] END algorithm=brute, n_neighbors=5, p=2, weights=uniform;, score=0.811 total time=   0.1s
+[CV 1/5] END algorithm=brute, n_neighbors=5, p=2, weights=distance;, score=0.811 total time=   0.0s
+[CV 2/5] END algorithm=brute, n_neighbors=5, p=2, weights=distance;, score=0.816 total time=   0.0s
+[CV 3/5] END algorithm=brute, n_neighbors=5, p=2, weights=distance;, score=0.822 total time=   0.0s
+[CV 4/5] END algorithm=brute, n_neighbors=5, p=2, weights=distance;, score=0.821 total time=   0.0s
+[CV 5/5] END algorithm=brute, n_neighbors=5, p=2, weights=distance;, score=0.807 total time=   0.0s
+hyperparameter tuning for KNN:
+
+Best score of model:
+0.8234999999999999 
+
+Best params of model:
+{'algorithm': 'auto', 'n_neighbors': 5, 'p': 1, 'weights': 'distance'} 
+
+Best estimator of model:
+KNeighborsClassifier(p=1, weights='distance') 
+
+--------------------------------------------
+hyperparameter tuning for Random Forest:
+
+Best score of model:
+0.8600000000000001 
+
+Best params of model:
+{'max_depth': 6, 'max_features': 6} 
+
+Best estimator of model:
+RandomForestClassifier(max_depth=6, max_features=6, min_samples_split=4,
+                       n_estimators=50) 
+
+--------------------------------------------
+hyperparameter tuning for XGB:
+
+Best score of model:
+0.8630000000000001 
+
+Best params of model:
+{'gamma': 0.001, 'learning_rate': 0.1, 'max_depth': 5, 'min_child_weight': 1} 
+
+Best estimator of model:
+XGBClassifier(base_score=0.5, booster='gbtree', callbacks=None,
+              colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
+              early_stopping_rounds=None, enable_categorical=False,
+              eval_metric=None, gamma=0.001, gpu_id=-1, grow_policy='depthwise',
+              importance_type=None, interaction_constraints='',
+              learning_rate=0.1, max_bin=256, max_cat_to_onehot=4,
+              max_delta_step=0, max_depth=5, max_leaves=0, min_child_weight=1,
+              missing=nan, monotone_constraints='()', n_estimators=100,
+              n_jobs=0, num_parallel_tree=1, predictor='auto', random_state=0,
+              reg_alpha=0, reg_lambda=1, ...) 
+
+--------------------------------------------
+Fitting 6 folds for each of 4 candidates, totalling 24 fits
+[CV 1/6] END ...................n_components=1;, score=10.753 total time=   0.1s
+[CV 2/6] END ...................n_components=1;, score=10.813 total time=   0.1s
+[CV 3/6] END ...................n_components=1;, score=10.520 total time=   0.2s
+[CV 4/6] END ...................n_components=1;, score=10.861 total time=   0.2s
+[CV 5/6] END ...................n_components=1;, score=10.879 total time=   0.2s
+[CV 6/6] END ...................n_components=1;, score=10.252 total time=   0.2s
+[CV 1/6] END ...................n_components=2;, score=17.742 total time=   0.1s
+[CV 2/6] END ...................n_components=2;, score=17.841 total time=   0.2s
+[CV 3/6] END ...................n_components=2;, score=17.625 total time=   0.2s
+[CV 4/6] END ...................n_components=2;, score=17.899 total time=   0.3s
+[CV 5/6] END ...................n_components=2;, score=17.877 total time=   0.2s
+[CV 6/6] END ...................n_components=2;, score=21.029 total time=   0.2s
+[CV 1/6] END ...................n_components=3;, score=20.986 total time=   0.3s
+[CV 2/6] END ...................n_components=3;, score=23.424 total time=   0.3s
+[CV 3/6] END ...................n_components=3;, score=23.786 total time=   0.3s
+[CV 4/6] END ...................n_components=3;, score=23.776 total time=   0.3s
+[CV 5/6] END ...................n_components=3;, score=22.063 total time=   0.4s
+[CV 6/6] END ...................n_components=3;, score=24.386 total time=   0.3s
+[CV 1/6] END ...................n_components=4;, score=28.541 total time=   0.3s
+[CV 2/6] END ...................n_components=4;, score=27.989 total time=   0.3s
+[CV 3/6] END ...................n_components=4;, score=27.493 total time=   0.3s
+[CV 4/6] END ...................n_components=4;, score=28.409 total time=   0.3s
+[CV 5/6] END ...................n_components=4;, score=28.117 total time=   0.3s
+[CV 6/6] END ...................n_components=4;, score=26.849 total time=   0.4s
+hyperparameter tuning for Gaussian Mixture Model:
+
+Best score of model:
+27.899768135848788 
+
+Best params of model:
+{'n_components': 4} 
+
+Best estimator of model:
+GaussianMixture(n_components=4) 
+
+--------------------------------------------
+Initialization 0
+Initialization converged: True
+Classification Reports of all models in training phase:
+
+              precision    recall  f1-score   support
+
+           0       0.83      0.97      0.89      6353
+           1       0.64      0.24      0.35      1647
+
+    accuracy                           0.82      8000
+   macro avg       0.73      0.60      0.62      8000
+weighted avg       0.79      0.82      0.78      8000
+
+--------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.86      0.98      0.92      6353
+           1       0.85      0.40      0.54      1647
+
+    accuracy                           0.86      8000
+   macro avg       0.86      0.69      0.73      8000
+weighted avg       0.86      0.86      0.84      8000
+
+--------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.89      0.96      0.93      6353
+           1       0.80      0.56      0.66      1647
+
+    accuracy                           0.88      8000
+   macro avg       0.85      0.76      0.80      8000
+weighted avg       0.88      0.88      0.87      8000
+
+--------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.88      0.97      0.92      6353
+           1       0.79      0.48      0.60      1647
+
+    accuracy                           0.87      8000
+   macro avg       0.83      0.72      0.76      8000
+weighted avg       0.86      0.87      0.85      8000
+
+--------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.89      0.98      0.93      6353
+           1       0.87      0.54      0.67      1647
+
+    accuracy                           0.89      8000
+   macro avg       0.88      0.76      0.80      8000
+weighted avg       0.89      0.89      0.88      8000
+
+--------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.90      0.98      0.94      6353
+           1       0.86      0.57      0.69      1647
+
+    accuracy                           0.89      8000
+   macro avg       0.88      0.77      0.81      8000
+weighted avg       0.89      0.89      0.88      8000
+
+--------------------------------------------
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      7963
+
+    accuracy                           1.00      7963
+   macro avg       1.00      1.00      1.00      7963
+weighted avg       1.00      1.00      1.00      7963
+
+--------------------------------------------
+Test Phase:
+
+(1996, 17)
+Evaluation parameters for Random Forest:
+
+ROC AUC Score: 0.7056451290386053
+Confusion Matrix:
+ [[1545   62]
+ [ 214  175]]
+Accuracy Score: 0.8617234468937875
+Precision Score: 0.7383966244725738
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.88      0.96      0.92      1607
+           1       0.74      0.45      0.56       389
+
+    accuracy                           0.86      1996
+   macro avg       0.81      0.71      0.74      1996
+weighted avg       0.85      0.86      0.85      1996
+
+--------------------------------------------
+Evaluation parameters for XGB:
+
+ROC AUC Score: 0.5835403592572982
+Confusion Matrix:
+ [[946 661]
+ [164 225]]
+Accuracy Score: 0.5866733466933868
+Precision Score: 0.25395033860045146
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.85      0.59      0.70      1607
+           1       0.25      0.58      0.35       389
+
+    accuracy                           0.59      1996
+   macro avg       0.55      0.58      0.52      1996
+weighted avg       0.74      0.59      0.63      1996
+
+--------------------------------------------
+Evaluation parameters for Dtree:
+
+ROC AUC Score: 0.7123982000342332
+Confusion Matrix:
+ [[1513   94]
+ [ 201  188]]
+Accuracy Score: 0.8522044088176353
+Precision Score: 0.6666666666666666
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.88      0.94      0.91      1607
+           1       0.67      0.48      0.56       389
+
+    accuracy                           0.85      1996
+   macro avg       0.77      0.71      0.74      1996
+weighted avg       0.84      0.85      0.84      1996
+
+--------------------------------------------
+Getting infos for GMM thresholds and score in test phase:
+
+[ -12.10005918  -22.79272698   -2.3360965  ...   -3.78104465 -352.84338018
+ -219.8892215 ]
+The threshold of the score is -159.92
+[0 0 0 ... 0 1 1]
+--------------------------------------------

@@ -7,8 +7,6 @@ import sys
 pd.options.display.max_rows = None
 pd.options.display.max_columns = None
 import tkinter
-import utils_service as us
-from imblearn.under_sampling import NearMiss
 
 sys.stdout = open('./output/report.txt', 'wt')
 sns.set(palette="Set2")
@@ -128,13 +126,6 @@ plt.xticks(rotation=90)
 plt.savefig("./output/outliers.png")
 plt.show()
 
-## Removing outliers:
-#ds_train['EstimatedSalary'] = us.remove_outliers(ds, 'EstimatedSalary')
-#sns.boxenplot(ds['EstimatedSalary'])
-#plt.ylabel('distribution')
-#plt.savefig("./output/removing_outliers_estimated_salary.png")
-#plt.show()
-
 ## Reorder the columns
 continuous_vars = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary', 'BalanceSalaryRatio', 'TenureByAge', 'CreditScoreGivenAge']
 cat_vars = ['HasCrCard', 'IsActiveMember', 'Geography', 'Gender']
@@ -171,3 +162,51 @@ ds_train[continuous_vars] = (ds_train[continuous_vars] - minVec) / (maxVec - min
 print('First five rows of the Training Set after min-max normalization:')
 print(ds_train.head())
 print('--------------------------------------------')
+
+
+
+
+## Preparing Training set for GMM:
+ds_train_gmm = ds[ds['Exited'] == 0]
+print('Total number of rows for the Training set and the Test set:')
+print(len(ds_train_gmm))
+print('--------------------------------------------')
+
+
+## Add new feature:
+# Balance Salary Ratio:
+ds_train_gmm['BalanceSalaryRatio'] = ds_train_gmm.Balance / ds_train_gmm.EstimatedSalary
+
+ds_train_gmm['TenureByAge'] = ds_train_gmm.Tenure / (ds_train_gmm.Age)
+# Credit Score Given Age:
+ds_train_gmm['CreditScoreGivenAge'] = ds_train_gmm.CreditScore / (ds_train_gmm.Age)
+
+
+## Reorder the columns
+continuous_vars = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary', 'BalanceSalaryRatio', 'TenureByAge', 'CreditScoreGivenAge']
+cat_vars = ['HasCrCard', 'IsActiveMember', 'Geography', 'Gender']
+ds_train_gmm = ds_train_gmm[['Exited'] + continuous_vars + cat_vars]
+print('First five rows of the Reordered Training Set For GMM:')
+print(ds_train.head())
+print('--------------------------------------------')
+
+## Change the 0 in categorical variables to -1
+ds_train_gmm.loc[ds_train_gmm.HasCrCard == 0, 'HasCrCard'] = -1
+ds_train_gmm.loc[ds_train_gmm.IsActiveMember == 0, 'IsActiveMember'] = -1
+
+## One hot encode the categorical variables
+lst = ['Geography', 'Gender']
+remove = list()
+for i in lst:
+    if (ds_train_gmm[i].dtype == np.str or ds_train_gmm[i].dtype == np.object):
+        for j in ds_train_gmm[i].unique():
+            ds_train_gmm[i + '_' + j] = np.where(ds_train_gmm[i] == j, 1, -1)
+        remove.append(i)
+ds_train_gmm = ds_train_gmm.drop(remove, axis=1)
+
+
+## Min-Max Normalization (min-max scaling the continuous variables):
+print("Min-Max normalization:\n")
+minVec = ds_train_gmm[continuous_vars].min().copy()
+maxVec = ds_train_gmm[continuous_vars].max().copy()
+ds_train_gmm[continuous_vars] = (ds_train_gmm[continuous_vars] - minVec) / (maxVec - minVec)
