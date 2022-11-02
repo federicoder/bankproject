@@ -93,7 +93,7 @@ ds['EstimatedSalary'] = ds['EstimatedSalary'].astype(np.int64)
 ds['Balance'] = ds['Balance'].astype(np.int64)
 
 ## Split Dataset in Train set and Test set:
-ds_train = ds.sample(frac=0.8, random_state=200)
+ds_train = ds.sample(frac=0.8, random_state=42)
 ds_test = ds.drop(ds_train.index)
 print('Total number of rows for the Training set and the Test set:')
 print(len(ds_train))
@@ -207,6 +207,6 @@ ds_train_gmm = ds_train_gmm.drop(remove, axis=1)
 
 ## Min-Max Normalization (min-max scaling the continuous variables):
 print("Min-Max normalization:\n")
-minVec = ds_train_gmm[continuous_vars].min().copy()
-maxVec = ds_train_gmm[continuous_vars].max().copy()
-ds_train_gmm[continuous_vars] = (ds_train_gmm[continuous_vars] - minVec) / (maxVec - minVec)
+minVec2 = ds_train_gmm[continuous_vars].min().copy()
+maxVec2 = ds_train_gmm[continuous_vars].max().copy()
+ds_train_gmm[continuous_vars] = (ds_train_gmm[continuous_vars] - minVec2) / (maxVec2 - minVec2)

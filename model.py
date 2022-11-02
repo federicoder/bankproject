@@ -1,7 +1,8 @@
 # Support functions
+from math import nan
 
 from sklearn.model_selection import GridSearchCV
-from preparingdata import ds_train,ds_train_gmm
+from preparingdata import ds_train, ds_train_gmm
 from utils_service import *
 from sklearn.linear_model import LogisticRegression
 from sklearn.mixture import GaussianMixture
@@ -33,7 +34,6 @@ log_primal_Grid.fit(x_train, y_train)
 print("hyperparameter tuning for logistic regression:\n")
 best_model(log_primal_Grid)
 print('--------------------------------------------')
-
 
 # Fit SVM
 param_grid = {'C': [0.5, 100, 150], 'gamma': [0.1, 0.01, 0.001], 'probability': [True], 'kernel': ['rbf']}
@@ -94,7 +94,6 @@ print("hyperparameter tuning for Gaussian Mixture Model:\n")
 best_model(gmm_grid)
 print('--------------------------------------------')
 
-
 ### FIT BEST MODELS:
 # Fit primal logistic regression
 log_primal = LogisticRegression(C=100, class_weight=None, dual=False, fit_intercept=True, intercept_scaling=1,
@@ -144,10 +143,11 @@ xgb = XGBClassifier(base_score=0.5, booster='gbtree', callbacks=None,
                     eval_metric=None, gamma=0.001, gpu_id=-1, grow_policy='depthwise',
                     importance_type=None, interaction_constraints='',
                     learning_rate=0.1, max_bin=256, max_cat_to_onehot=4,
-                    max_delta_step=0, max_depth=5, max_leaves=0, min_child_weight=1,
-                    monotone_constraints='()', n_estimators=100,
+                    max_delta_step=0, max_depth=6, max_leaves=0, min_child_weight=10,
+                    missing=nan, monotone_constraints='()', n_estimators=100,
                     n_jobs=0, num_parallel_tree=1, predictor='auto', random_state=0,
-                    reg_alpha=0, reg_lambda=1)
+                    reg_alpha=0, reg_lambda=1, )
+
 xgb.fit(x_train, y_train)
 
 gmm = GaussianMixture(verbose=True, random_state=200)
@@ -158,18 +158,25 @@ gmm_predict = gmm.predict(ds_train_gmm.loc[:, ds_train_gmm.columns != 'Exited'])
 
 
 print("Classification Reports of all models in training phase:\n")
+print("Classification Report for Logistic Regression:\n")
 print(classification_report(ds_train.Exited, log_primal.predict(x_train)))
 print('--------------------------------------------')
+print("Classification Report for SVM:\n")
 print(classification_report(ds_train.Exited, SVM_RBF.predict(x_train)))
 print('--------------------------------------------')
+print("Classification Report for Dtree:\n")
 print(classification_report(ds_train.Exited, dtree.predict(x_train)))
 print('--------------------------------------------')
+print("Classification Report for KNN:\n")
 print(classification_report(ds_train.Exited, knn.predict(x_train)))
 print('--------------------------------------------')
+print("Classification Report for Random Forest:\n")
 print(classification_report(ds_train.Exited, RF.predict(x_train)))
 print('--------------------------------------------')
+print("Classification Report for XGB:\n")
 print(classification_report(ds_train.Exited, xgb.predict(x_train)))
 print('--------------------------------------------')
 ## questa volendo si può togliere:
+print("Classification Report for GMM:\n")
 print(classification_report(ds_train_gmm.Exited, gmm_predict))
 print('--------------------------------------------')
