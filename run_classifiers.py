@@ -113,5 +113,5 @@ ax0.scatter(ds_test['BalanceSalaryRatio'], ds_test['TenureByAge'], c=ds_test['Ex
 # GMM Predictions
 ax1.set_title('GMM Predict Anomalies Using Percentage')
 ax1.scatter(ds_test['BalanceSalaryRatio'], ds_test['TenureByAge'], c=ds_test['anomaly_gmm_pct'], cmap='rainbow')
-plt.show()
 plt.savefig('./output/gmm_prediction.png')
+plt.show()
