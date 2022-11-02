@@ -1,8 +1,10 @@
 # Support functions
 from math import nan
+from sklearn.model_selection import train_test_split
 
 from sklearn.model_selection import GridSearchCV
-from preparingdata import ds_train, ds_train_gmm
+from matplotlib.colors import LogNorm
+from preparingdata import ds_train, ds_gmm, X_N_train, X_CV, y_CV
 from utils_service import *
 from sklearn.linear_model import LogisticRegression
 from sklearn.mixture import GaussianMixture
@@ -18,6 +20,12 @@ from IPython.display import Image
 import matplotlib.pyplot as plt
 import pydotplus
 from six import StringIO
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import average_precision_score
+from sklearn.metrics import precision_recall_curve
+from sklearn.model_selection import train_test_split
 
 # defining x_train and y_train for this phase:
 x_train, y_train = ds_train.loc[:, ds_train.columns != 'Exited'], ds_train.Exited
@@ -47,7 +55,7 @@ print('--------------------------------------------')
 print("Fit Decision Tree Classifier with max depth 8 setted:\n")
 param_grid = {'criterion': ['gini', 'entropy'], 'splitter': ['best', 'random']}
 dtree_grid = GridSearchCV(DecisionTreeClassifier(random_state=200, criterion="entropy", max_depth=8), param_grid,
-                          refit=True, verbose=3)
+                          refit=True)
 dtree_grid.fit(x_train, y_train)
 print("hyperparameter tuning for Decision Tree:\n")
 best_model(dtree_grid)
@@ -58,7 +66,7 @@ param_grid = {'n_neighbors': [1, 2, 3, 4, 5],
               'weights': ['uniform', 'distance'],
               'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
               'p': [1, 2]}
-knn_grid = GridSearchCV(KNeighborsClassifier(), param_grid, refit=True, verbose=3)
+knn_grid = GridSearchCV(KNeighborsClassifier(), param_grid, refit=True)
 knn_grid.fit(x_train, y_train)
 print("hyperparameter tuning for KNN:\n")
 best_model(knn_grid)
@@ -70,7 +78,7 @@ RanFor_grid = GridSearchCV(
     RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini', max_depth=10, max_features=10,
                            min_samples_leaf=1, min_samples_split=4,
                            min_weight_fraction_leaf=0.0, n_estimators=50, n_jobs=None,
-                           oob_score=False, random_state=None, verbose=0, warm_start=False), param_grid, cv=5,
+                           oob_score=False, random_state=None, warm_start=False), param_grid, cv=5,
     refit=True, verbose=0)
 RanFor_grid.fit(x_train, y_train)
 print("hyperparameter tuning for Random Forest:\n")
@@ -80,25 +88,18 @@ print('--------------------------------------------')
 # Fit Extreme Gradient boosting classifier
 param_grid = {'max_depth': [5, 6], 'gamma': [0.01, 0.001, 0.001], 'min_child_weight': [1, 5, 10],
               'learning_rate': [0.05, 0.1, 0.2, 0.3]}
-xgb_grid = GridSearchCV(XGBClassifier(), param_grid, cv=5, refit=True, verbose=0)
+xgb_grid = GridSearchCV(XGBClassifier(), param_grid, cv=5, refit=True)
 xgb_grid.fit(x_train, y_train)
 print("hyperparameter tuning for XGB:\n")
 best_model(xgb_grid)
 print('--------------------------------------------')
 
-## GMM with GSearchCV:
-tuned_parameters = {'n_components': np.array([1, 2, 3, 4])}
-gmm_grid = GridSearchCV(GaussianMixture(), param_grid=tuned_parameters, cv=6, refit=True, verbose=3)
-gmm_grid.fit(ds_train_gmm.loc[:, ds_train_gmm.columns != 'Exited'], None)
-print("hyperparameter tuning for Gaussian Mixture Model:\n")
-best_model(gmm_grid)
-print('--------------------------------------------')
 
 ### FIT BEST MODELS:
 # Fit primal logistic regression
 log_primal = LogisticRegression(C=100, class_weight=None, dual=False, fit_intercept=True, intercept_scaling=1,
                                 max_iter=250, n_jobs=None,
-                                penalty='l2', random_state=None, solver='lbfgs', tol=1e-05, verbose=0, warm_start=False)
+                                penalty='l2', random_state=None, solver='lbfgs', tol=1e-05, warm_start=False)
 log_primal.fit(x_train, y_train)
 
 # Fit Decision Tree Classifier Standard With max_depth:8:
@@ -129,7 +130,7 @@ knn.fit(x_train, y_train)
 # Fit SVM with RBF Kernel
 SVM_RBF = SVC(C=100, cache_size=200, class_weight=None, coef0=0.0, decision_function_shape='ovr', degree=3, gamma=0.1,
               kernel='rbf', max_iter=-1, probability=True,
-              random_state=None, shrinking=True, tol=0.001, verbose=False)
+              random_state=None, shrinking=True, tol=0.001)
 SVM_RBF.fit(x_train, y_train)
 
 RF = RandomForestClassifier(max_depth=8, max_features=8, min_samples_split=4,
@@ -150,13 +151,49 @@ xgb = XGBClassifier(base_score=0.5, booster='gbtree', callbacks=None,
 
 xgb.fit(x_train, y_train)
 
-gmm = GaussianMixture(verbose=True, random_state=200)
-gmm.fit(ds_train_gmm.loc[:, ds_train_gmm.columns != 'Exited'].values, None)
-gmm_predict = gmm.predict(ds_train_gmm.loc[:, ds_train_gmm.columns != 'Exited'])
+## GMM section
+gmm = GaussianMixture(random_state=200, n_components=4)
+gmm.fit(X_N_train)
+
+kfold = StratifiedKFold(n_splits=5)  # Create 5-CV split object
+T_vec = -np.arange(0, 1000, 2)  #Trying thresholds in steps of 2, from 0 to -1000. Note we are evaluating the negative log-likelihood.
+
+aucpr_vs_t = []
+precision_vs_t = []
+recall_vs_t = []
+
+for t in T_vec:
+
+    aucpr = []
+    precision = []
+    recall = []
+    k = 0
+    for train_index, test_index in kfold.split(X_CV, y_CV):
+        y_cv_proba = gmm.score_samples(X_CV[test_index])  # Predict the probabilities of fold "k" using the fitted GMM
+        y_cv_pred = y_cv_proba.copy()
+        y_cv_pred[y_cv_pred >= t] = 0
+        y_cv_pred[y_cv_pred < t] = 1
+        # print('Classification report')
+        # print(classification_report(y_CV[test_index], y_cv_pred))
+        precision.append(precision_score(y_CV[test_index], y_cv_pred))
+        recall.append(recall_score(y_CV[test_index], y_cv_pred))
+        aucpr.append(average_precision_score(y_CV[test_index], y_cv_pred))
+        # print("Threshold T = %i --> Fold %i - aucpr=%.3f - Precision=%.3f - Recall=%.3f" %(t, k+1, aucpr[k], precision[k], recall[k]))
+        k = k + 1
+
+    aucpr_vs_t.append(np.mean(aucpr))
+    precision_vs_t.append(np.mean(precision))
+    recall_vs_t.append(np.mean(recall))
+    # print('CV average AUCPR: %.3f +/- %.3f' % ( np.mean(aucpr), np.std(aucpr)))
+    # print('CV average precision: %.3f +/- %.3f' % ( np.mean(precision), np.std(precision)))
+    # print('CV average recall: %.3f +/- %.3f' % ( np.mean(recall), np.std(recall)))
+
+
+
+
+
 
 # cross validation section done as seen on lessons:
-
-
 print("Classification Reports of all models in training phase:\n")
 print("Classification Report for Logistic Regression:\n")
 print(classification_report(ds_train.Exited, log_primal.predict(x_train)))
@@ -175,8 +212,4 @@ print(classification_report(ds_train.Exited, RF.predict(x_train)))
 print('--------------------------------------------')
 print("Classification Report for XGB:\n")
 print(classification_report(ds_train.Exited, xgb.predict(x_train)))
-print('--------------------------------------------')
-## questa volendo si può togliere:
-print("Classification Report for GMM:\n")
-print(classification_report(ds_train_gmm.Exited, gmm_predict))
 print('--------------------------------------------')

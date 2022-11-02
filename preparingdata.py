@@ -4,6 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sys
+
+from sklearn.model_selection import train_test_split
+
 pd.options.display.max_rows = None
 pd.options.display.max_columns = None
 import tkinter
@@ -69,12 +72,12 @@ plt.savefig("./output/proportions_RelevantCategoricalFeatures_Exited.png")
 
 ## Relations based on the continuous variables
 fig, axarr = plt.subplots(3, 2, figsize=(20, 12))
-sns.boxplot(y='CreditScore',x = 'Exited', hue = 'Exited',data = ds, ax=axarr[0][0])
-sns.boxplot(y='Age',x = 'Exited', hue = 'Exited',data = ds , ax=axarr[0][1])
-sns.boxplot(y='Tenure',x = 'Exited', hue = 'Exited',data = ds, ax=axarr[1][0])
-sns.boxplot(y='Balance',x = 'Exited', hue = 'Exited',data = ds, ax=axarr[1][1])
-sns.boxplot(y='NumOfProducts',x = 'Exited', hue = 'Exited',data = ds, ax=axarr[2][0])
-sns.boxplot(y='EstimatedSalary',x = 'Exited', hue = 'Exited',data = ds, ax=axarr[2][1])
+sns.boxplot(y='CreditScore', x='Exited', hue='Exited', data=ds, ax=axarr[0][0])
+sns.boxplot(y='Age', x='Exited', hue='Exited', data=ds, ax=axarr[0][1])
+sns.boxplot(y='Tenure', x='Exited', hue='Exited', data=ds, ax=axarr[1][0])
+sns.boxplot(y='Balance', x='Exited', hue='Exited', data=ds, ax=axarr[1][1])
+sns.boxplot(y='NumOfProducts', x='Exited', hue='Exited', data=ds, ax=axarr[2][0])
+sns.boxplot(y='EstimatedSalary', x='Exited', hue='Exited', data=ds, ax=axarr[2][1])
 plt.savefig("./output/proportions_RelevantContinuousFeatures_Exited.png")
 
 ## Checking correlation:
@@ -99,7 +102,6 @@ print('Total number of rows for the Training set and the Test set:')
 print(len(ds_train))
 print(len(ds_test))
 print('--------------------------------------------')
-
 
 ## Add new feature:
 # Balance Salary Ratio:
@@ -127,7 +129,8 @@ plt.savefig("./output/outliers.png")
 plt.show()
 
 ## Reorder the columns
-continuous_vars = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary', 'BalanceSalaryRatio', 'TenureByAge', 'CreditScoreGivenAge']
+continuous_vars = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary', 'BalanceSalaryRatio',
+                   'TenureByAge', 'CreditScoreGivenAge']
 cat_vars = ['HasCrCard', 'IsActiveMember', 'Geography', 'Gender']
 ds_train = ds_train[['Exited'] + continuous_vars + cat_vars]
 print('First five rows of the Reordered Training Set:')
@@ -163,50 +166,59 @@ print('First five rows of the Training Set after min-max normalization:')
 print(ds_train.head())
 print('--------------------------------------------')
 
-
-
-
 ## Preparing Training set for GMM:
-ds_train_gmm = ds[ds['Exited'] == 0]
-print('Total number of rows for the Training set and the Test set:')
-print(len(ds_train_gmm))
-print('--------------------------------------------')
-
+ds_gmm = ds.copy()
 
 ## Add new feature:
 # Balance Salary Ratio:
-ds_train_gmm['BalanceSalaryRatio'] = ds_train_gmm.Balance / ds_train_gmm.EstimatedSalary
+ds_gmm['BalanceSalaryRatio'] = ds_gmm.Balance / ds_gmm.EstimatedSalary
 
-ds_train_gmm['TenureByAge'] = ds_train_gmm.Tenure / (ds_train_gmm.Age)
+ds_gmm['TenureByAge'] = ds_gmm.Tenure / (ds_gmm.Age)
 # Credit Score Given Age:
-ds_train_gmm['CreditScoreGivenAge'] = ds_train_gmm.CreditScore / (ds_train_gmm.Age)
-
+ds_gmm['CreditScoreGivenAge'] = ds_gmm.CreditScore / (ds_gmm.Age)
 
 ## Reorder the columns
-continuous_vars = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary', 'BalanceSalaryRatio', 'TenureByAge', 'CreditScoreGivenAge']
+continuous_vars = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary', 'BalanceSalaryRatio',
+                   'TenureByAge', 'CreditScoreGivenAge']
 cat_vars = ['HasCrCard', 'IsActiveMember', 'Geography', 'Gender']
-ds_train_gmm = ds_train_gmm[['Exited'] + continuous_vars + cat_vars]
-print('First five rows of the Reordered Training Set For GMM:')
-print(ds_train.head())
-print('--------------------------------------------')
+ds_gmm = ds_gmm[['Exited'] + continuous_vars + cat_vars]
 
 ## Change the 0 in categorical variables to -1
-ds_train_gmm.loc[ds_train_gmm.HasCrCard == 0, 'HasCrCard'] = -1
-ds_train_gmm.loc[ds_train_gmm.IsActiveMember == 0, 'IsActiveMember'] = -1
+ds_gmm.loc[ds_gmm.HasCrCard == 0, 'HasCrCard'] = -1
+ds_gmm.loc[ds_gmm.IsActiveMember == 0, 'IsActiveMember'] = -1
 
 ## One hot encode the categorical variables
 lst = ['Geography', 'Gender']
 remove = list()
 for i in lst:
-    if (ds_train_gmm[i].dtype == np.str or ds_train_gmm[i].dtype == np.object):
-        for j in ds_train_gmm[i].unique():
-            ds_train_gmm[i + '_' + j] = np.where(ds_train_gmm[i] == j, 1, -1)
+    if (ds_gmm[i].dtype == np.str or ds_gmm[i].dtype == np.object):
+        for j in ds_gmm[i].unique():
+            ds_gmm[i + '_' + j] = np.where(ds_gmm[i] == j, 1, -1)
         remove.append(i)
-ds_train_gmm = ds_train_gmm.drop(remove, axis=1)
-
+ds_gmm = ds_gmm.drop(remove, axis=1)
 
 ## Min-Max Normalization (min-max scaling the continuous variables):
-print("Min-Max normalization:\n")
-minVec2 = ds_train_gmm[continuous_vars].min().copy()
-maxVec2 = ds_train_gmm[continuous_vars].max().copy()
-ds_train_gmm[continuous_vars] = (ds_train_gmm[continuous_vars] - minVec2) / (maxVec2 - minVec2)
+minVec2 = ds_gmm[continuous_vars].min().copy()
+maxVec2 = ds_gmm[continuous_vars].max().copy()
+ds_gmm[continuous_vars] = (ds_gmm[continuous_vars] - minVec2) / (maxVec2 - minVec2)
+
+df_0 = ds_gmm[ds_gmm['Exited']== 0]
+df_1 = ds_gmm[ds_gmm['Exited']== 1]
+
+# Split non-exited data in 90% for training GMM and 10% for cross-validation and testing Hold OUT!
+X_N_train, X_N_cv_test, y_N_train, y_N_cv_test = train_test_split(df_0.drop(['Exited'],axis=1), df_0['Exited'], test_size=0.1, random_state=1)
+# Split the exited data in 50% for cross-validation and 50% for testing
+X_F_cv, X_F_test, y_F_cv, y_F_test = train_test_split(df_1.drop(['Exited'],axis=1), df_1['Exited'], test_size=0.5, random_state=1)
+# Split the remaining 10% non-exited in 50% for cross-validation and 50% for testing
+X_N_cv, X_N_test, y_N_cv, y_N_test = train_test_split(X_N_cv_test, y_N_cv_test , test_size=0.5, random_state=1)
+
+# Generate the 3 new datasets (Train + CV + test)
+X_CV = np.vstack([X_N_cv, X_F_cv])
+y_CV = np.hstack([y_N_cv, y_F_cv])
+X_test = np.vstack([X_N_test, X_F_test])
+y_test = np.hstack([y_N_test, y_F_test])
+
+
+# siccome i dati erano 10000 record in ds e gli exited sono 2000 (20%), il 10% per il test alla fine sarà una percetuale minima
+
+
